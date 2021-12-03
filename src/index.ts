@@ -92,7 +92,7 @@ async function addMeme(text: string, message: Discord.Message): Promise<void> {
     let imageUrl = message.attachments.size > 0 ? undefined : splitText[1];
     const customPrefix = message.attachments.size > 0 ? splitText[1] : splitText[2];
 
-    if (Array.from(memes.values()).map(m => m.name).includes(memeName) || memeName === 'config') {
+    if (!memes.has(memeName) || memeName === 'config') {
       message.channel.send('That meme already exists!')
         .catch(console.error);
     } else if (Array.from(memes.values())
@@ -132,15 +132,13 @@ async function addMeme(text: string, message: Discord.Message): Promise<void> {
             .catch(console.error);
         }
 
-        const config: MemeConfig[] = Array.from(memes.values());
-        config.push({
+        memes.set(memeName, {
           name: memeName,
           filename: `${memeName}.png`,
           customPrefix: customPrefix
         });
 
-        await saveConfig(config);
-        await initMemes();
+        await saveConfig(Array.from(memes.values()));
 
         message.channel.send(`Added meme ${splitText[0]}!`)
           .catch(console.error);
