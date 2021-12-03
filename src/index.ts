@@ -20,12 +20,6 @@ registerFont('./src/fonts/roboto.ttf', { family: FONT_FAMILY });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user!.tag}`);
-
-  if (!fs.existsSync('./src/config.json')) {
-    fs.copyFileSync('./src/config.template.json', './src/config.json');
-    console.log('Created config.json');
-  }
-
   initMemes();
 });
 
@@ -215,6 +209,11 @@ async function saveConfig(config: MemeConfig[]): Promise<void> {
 }
 
 async function initMemes(): Promise<void> {
+  if (!fs.existsSync('./src/config.json')) {
+    fs.copyFileSync('./src/config.template.json', './src/config.json');
+    console.log('Created config.json');
+  }
+
   const config: MemeConfig[] = JSON.parse(fs.readFileSync('./src/config.json', 'utf8'));
 
   for (const meme of config) {
