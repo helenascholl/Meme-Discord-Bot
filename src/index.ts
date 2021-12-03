@@ -33,35 +33,64 @@ client.on('ready', () => {
 });
 
 client.on('message', async message => {
-  if (message.content.startsWith('!meme')) {
+  if (message.content.startsWith('!say')) {
     const memeName = message.content.split(' ')[1];
-    const text = message.content.substring(message.content.indexOf(' ', 6));
+    const text = message.content.indexOf(' ', 5) !== -1
+      ? message.content.substring(message.content.indexOf(' ', 6) + 1)
+      : '';
 
-    if (!memes.has(memeName)) {
-      message.channel.send("That meme doesn't exist!")
-        .catch(console.error);
-    } else if (!text) {
-      message.channel.send('No text provided!')
-        .catch(console.error);
-    } else {
-      const meme = memes.get(memeName)!;
-      const attachment = new Discord.MessageAttachment(await drawImage(meme, text), `${meme.name}.png`);
+    try {
+      new URL(memeName);
+      sendMeme(memeName, text, message);
+    } catch {
+      if (!memes.has(memeName)) {
+        message.channel.send('That meme doesn\'t exist!')
+          .catch(console.error);
+      } else {
+        sendMeme(memes.get(memeName)!, text, message);
+      }
+    }
+  } else {
+    for (const memeValue of Array.from(memes.values())) {
+      if (memeValue.customPrefix !== undefined && message.content.startsWith(memeValue.customPrefix)) {
+        const text = message.content.indexOf(' ') !== -1
+          ? message.content.substring(message.content.indexOf(' ') + 1)
+          : '';
 
-      message.channel.send(attachment)
-        .catch(console.error);
+        sendMeme(memeValue, text, message);
+      }
     }
   }
 });
 
 client.login(token).catch(console.error);
 
-async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
-  const image = await loadImage(`images/${meme.filename}`);
-  const canvas = createCanvas(IMAGE_WIDTH, image.height);
+async function sendMeme(meme: MemeConfig | string, text: string, message: Discord.Message): Promise<void> {
+  if (text !== '') {
+    try {
+      message.channel.send(new Discord.MessageAttachment(await drawImage(meme, text),
+        `${typeof meme === 'string' ? 'meme' : meme.name}.png`))
+        .catch(console.error);
+    } catch (e) {
+      message.channel.send('Unsupported image type!')
+        .catch(console.error);
+    }
+  } else {
+    message.channel.send('No text provided!')
+      .catch(console.error);
+  }
+}
+
+async function drawImage(meme: MemeConfig | string, text: string): Promise<Buffer> {
+  const image = typeof meme === 'string' ? await loadImage(meme) : await loadImage(`images/${meme.filename}`);
+  const imageHeight = image.height * IMAGE_WIDTH / image.width;
+
+  const canvas = createCanvas(IMAGE_WIDTH, imageHeight);
   const ctx = canvas.getContext('2d');
+
   const wrappedText = wrapText(text, IMAGE_WIDTH - 20, ctx);
 
-  ctx.drawImage(image, 0, 0);
+  ctx.drawImage(image, 0, 0, IMAGE_WIDTH, imageHeight);
 
   ctx.font = `30px ${FONT_FAMILY}`;
   ctx.fillStyle = 'white';
@@ -70,7 +99,7 @@ async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
 
   for (let i = 0; i < wrappedText.length; i++) {
     const x = IMAGE_WIDTH / 2;
-    const y = image.height - (30 * wrappedText.length - 1) + (30 * i);
+    const y = imageHeight - (30 * wrappedText.length - 1) + (30 * i);
 
     ctx.fillText(wrappedText[i], x, y);
     ctx.strokeText(wrappedText[i], x, y);
