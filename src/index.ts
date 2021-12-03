@@ -57,19 +57,24 @@ client.login(token).catch(console.error);
 
 async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
   const image = await loadImage(`images/${meme.filename}`);
-
   const canvas = createCanvas(IMAGE_WIDTH, image.height);
   const ctx = canvas.getContext('2d');
+  const wrappedText = wrapText(text, IMAGE_WIDTH - 20, ctx);
 
   ctx.drawImage(image, 0, 0);
 
   ctx.font = `30px ${FONT_FAMILY}`;
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
-  ctx.fillText(text, IMAGE_WIDTH / 2, image.height - 20);
-
   ctx.strokeStyle = 'black';
-  ctx.strokeText(text, IMAGE_WIDTH / 2, image.height - 20);
+
+  for (let i = 0; i < wrappedText.length; i++) {
+    const x = IMAGE_WIDTH / 2;
+    const y = image.height - (30 * wrappedText.length - 1) + (30 * i);
+
+    ctx.fillText(wrappedText[i], x, y);
+    ctx.strokeText(wrappedText[i], x, y);
+  }
 
   return canvas.toBuffer();
 }
