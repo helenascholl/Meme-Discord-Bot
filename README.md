@@ -4,7 +4,7 @@ A Discord bot.
 
 ## Invite the bot
 
-https://discordapp.com/oauth2/authorize?&client_id=[CLIENT ID]&scope=bot&permissions=[PERMISSIONS]
+https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=2048
 
 ## For Developers
 
@@ -17,8 +17,7 @@ while an instance is running, you should create a second bot and use it's token 
 
 ### Get your invite link
 
-To create an invite link for your bot, replace `[CLIENT ID]` in the link above with the Client ID of your Discord
-Application and `[PERMISSIONS]` with the generated integer.
+To create an invite link for your bot, replace `916227104666968074` in the link above with the Client ID of your Discord Application.
 
 ### Start the Bot
 
