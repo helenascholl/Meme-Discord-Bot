@@ -21,7 +21,7 @@ registerFont('./src/fonts/roboto.ttf', { family: FONT_FAMILY });
 client.on('ready', () => {
   client.user!.setActivity('!say help', { type: 'LISTENING' });
   console.log(`Logged in as ${client.user!.tag}`);
-  initMemes();
+  init();
 });
 
 client.on('message', async message => {
@@ -209,10 +209,15 @@ async function saveConfig(config: MemeConfig[]): Promise<void> {
   fs.writeFileSync('./src/config.json', JSON.stringify(config, null, 2));
 }
 
-async function initMemes(): Promise<void> {
+async function init(): Promise<void> {
   if (!fs.existsSync('./src/config.json')) {
     fs.copyFileSync('./src/config.template.json', './src/config.json');
     console.log('Created config.json');
+  }
+
+  if (!fs.existsSync('./images')) {
+    fs.mkdirSync('./images');
+    console.log('Created images directory');
   }
 
   const config: MemeConfig[] = JSON.parse(fs.readFileSync('./src/config.json', 'utf8'));
