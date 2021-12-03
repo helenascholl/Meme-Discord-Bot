@@ -7,13 +7,15 @@ import { createCanvas, loadImage, registerFont } from 'canvas';
 dotenv.config();
 
 const IMAGE_WIDTH = 500;
+const FONT_FAMILY = 'Roboto';
+
 const token = process.env['NODE_ENV'] === 'development' ?
   process.env['DISCORD_DEV_TOKEN'] :
   process.env['DISCORD_PROD_TOKEN'];
 const client = new Discord.Client();
 const memes = new Map<string, MemeConfig>();
 
-registerFont('./src/fonts/roboto.ttf', { family: 'Roboto' });
+registerFont('./src/fonts/roboto.ttf', { family: FONT_FAMILY });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user!.tag}`);
@@ -61,7 +63,7 @@ async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
 
   ctx.drawImage(image, 0, 0);
 
-  ctx.font = '30px Roboto';
+  ctx.font = `30px ${FONT_FAMILY}`;
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
   ctx.fillText(text, IMAGE_WIDTH / 2, image.height - 20);
