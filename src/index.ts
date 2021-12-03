@@ -19,6 +19,7 @@ const memes = new Map<string, MemeConfig>();
 registerFont('./src/fonts/roboto.ttf', { family: FONT_FAMILY });
 
 client.on('ready', () => {
+  client.user!.setActivity('!say help', { type: 'LISTENING' });
   console.log(`Logged in as ${client.user!.tag}`);
   initMemes();
 });
