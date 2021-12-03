@@ -1,5 +1,7 @@
-export default interface MemeConfig {
+interface MemeConfig {
   name: string;
-  imagePath: string;
-  customPrefix?: string
+  filename: string;
+  customPrefix?: string;
 }
+
+export default MemeConfig;
