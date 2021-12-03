@@ -292,7 +292,7 @@ function wrapText(text: string, maxWidth: number, ctx: CanvasRenderingContext2D)
     const { width } = ctx.measureText(testLine);
 
     if (width > maxWidth && line !== '') {
-      lines.push(line);
+      lines.push(testLine.trimEnd());
       line = '';
     } else {
       line = testLine;
