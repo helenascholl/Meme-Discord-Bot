@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist/index.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon --watch src src/index.ts",
+    "start:dev": "cross-env NODE_ENV=development nodemon --watch src src/index.ts --ignore src/config.json",
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts'"
   },
