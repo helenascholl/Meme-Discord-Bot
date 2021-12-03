@@ -80,11 +80,24 @@ function config(text: string, message: Discord.Message): void {
       addMeme(commandText, message);
     } else if (text.startsWith('remove')) {
       removeMeme(commandText, message);
+    } else if (text.startsWith('list')) {
+      listMemes(message);
     } else {
       message.channel.send('Invalid operation!')
         .catch(console.error);
     }
   }
+}
+
+function listMemes(message: Discord.Message): void {
+  let memeList = '';
+
+  for (const meme of Array.from(memes.values())) {
+    memeList += ` - ${meme.name}${meme.customPrefix !== undefined ? ` (\`${meme.customPrefix}\`)` : ''}\n`;
+  }
+
+  message.channel.send(`Available memes: \n${memeList}`)
+    .catch(console.error);
 }
 
 async function removeMeme(text: string, message: Discord.Message): Promise<void> {
