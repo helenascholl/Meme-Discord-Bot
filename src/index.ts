@@ -78,10 +78,34 @@ function config(text: string, message: Discord.Message): void {
 
     if (text.startsWith('add')) {
       addMeme(commandText, message);
+    } else if (text.startsWith('remove')) {
+      removeMeme(commandText, message);
     } else {
       message.channel.send('Invalid operation!')
         .catch(console.error);
     }
+  }
+}
+
+async function removeMeme(text: string, message: Discord.Message): Promise<void> {
+  if (text !== '') {
+    if (!memes.has(text)) {
+      message.channel.send("That meme doesn't exist!")
+        .catch(console.error);
+    } else {
+      const meme = memes.get(text)!;
+
+      memes.delete(text);
+      await saveConfig(Array.from(memes.values()));
+
+      fs.rmSync(`images/${meme.filename}`);
+
+      message.channel.send(`Removed meme ${text}!`)
+        .catch(console.error);
+    }
+  } else {
+    message.channel.send('Please specify a name!')
+      .catch(console.error);
   }
 }
 
