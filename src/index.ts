@@ -36,6 +36,8 @@ client.on('message', async message => {
       : '';
 
     config(text, message);
+  } else if (message.content.startsWith('!say help')) {
+    help(message);
   } else if (message.content.startsWith('!say')) {
     const memeName = message.content.split(' ')[1];
     const text = message.content.indexOf(' ', 5) !== -1
@@ -67,6 +69,25 @@ client.on('message', async message => {
 });
 
 client.login(token).catch(console.error);
+
+function help(message: Discord.Message) {
+  const help = '```!say [meme name] [text]\n'
+    + '!say help```\n'
+    + 'Only for Admins and users with the Memegod role:\n'
+    + '```!say config add [meme name] [image url] [custom prefix (optional)]\n'
+    + '!say config add [meme name] [custom prefix (optional)] (send image as attachment)\n'
+    + '!say config remove [meme name]\n'
+    + '!say config list```';
+
+  const embed = new Discord.MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Memebot')
+    .setURL('https://github.com/schollsebastian/Meme-Discord-Bot')
+    .addField('Help', help);
+
+  message.channel.send(embed)
+    .catch(console.error);
+}
 
 function config(text: string, message: Discord.Message): void {
   if (!(message.member?.hasPermission('ADMINISTRATOR')
@@ -131,7 +152,7 @@ async function addMeme(text: string, message: Discord.Message): Promise<void> {
     let imageUrl = message.attachments.size > 0 ? undefined : splitText[1];
     const customPrefix = message.attachments.size > 0 ? splitText[1] : splitText[2];
 
-    if (!memes.has(memeName) || memeName === 'config') {
+    if (!memes.has(memeName) || [ 'config', 'help' ].includes(memeName)) {
       message.channel.send('That meme already exists!')
         .catch(console.error);
     } else if (Array.from(memes.values())
