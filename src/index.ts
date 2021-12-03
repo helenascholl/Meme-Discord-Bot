@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import MemeConfig from './meme-config.interface';
-import config from './config.json';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -14,7 +14,14 @@ const memes = new Map<string, MemeConfig>();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user!.tag}`);
 
-  for (const meme of config as MemeConfig[]) {
+  if (!fs.existsSync('./src/config.json')) {
+    fs.copyFileSync('./src/config.template.json', './src/config.json');
+    console.log('Created config.json');
+  }
+
+  const config: MemeConfig[] = JSON.parse(fs.readFileSync('./src/config.json', 'utf8'));
+
+  for (const meme of config) {
     memes.set(meme.name, meme);
   }
 });
