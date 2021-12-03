@@ -6,6 +6,18 @@ Create memes quickly in Discord.
 
 https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=2048
 
+## Usage
+
+- `!say [meme name] [text]`
+- `!say help`
+
+### Only for Admins and users with the Memegod role
+
+- `!say config add [meme name] [image url] [custom prefix (optional)]`
+- `!say config add [meme name] [custom prefix (optional)] (send image as attachment)`
+- `!say config remove [meme name]`
+- `!say config list`
+
 ## For Developers
 
 ### Create a Discord Application
