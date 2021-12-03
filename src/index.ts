@@ -147,7 +147,7 @@ async function addMeme(text: string, message: Discord.Message): Promise<void> {
     let imageUrl = message.attachments.size > 0 ? undefined : splitText[1];
     const customPrefix = message.attachments.size > 0 ? splitText[1] : splitText[2];
 
-    if (!memes.has(memeName) || [ 'config', 'help' ].includes(memeName)) {
+    if (memes.has(memeName) || [ 'config', 'help' ].includes(memeName)) {
       message.channel.send('That meme already exists!')
         .catch(console.error);
     } else if (Array.from(memes.values())
