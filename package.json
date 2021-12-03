@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/schollsebastian/Meme-Discord-Bot#readme",
   "dependencies": {
+    "canvas": "^2.8.0",
     "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "jimp": "^0.16.1"
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
