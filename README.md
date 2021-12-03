@@ -1,6 +1,6 @@
-# Your Bot
+# Meme-Discord-Bot
 
-A Discord bot.
+Create memes quickly in Discord.
 
 ## Invite the bot
 
