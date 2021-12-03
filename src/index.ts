@@ -73,3 +73,25 @@ async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
 
   return canvas.toBuffer();
 }
+
+function wrapText(text: string, maxWidth: number, ctx: CanvasRenderingContext2D): string[] {
+  const words = text.split(' ');
+  const lines: string[] = [];
+  let line = '';
+
+  for (const word of words) {
+    const testLine = `${line}${word} `;
+    ctx.font = `30px ${FONT_FAMILY}`;
+    const { width } = ctx.measureText(testLine);
+
+    if (width > maxWidth && line !== '') {
+      lines.push(line);
+      line = '';
+    } else {
+      line = testLine;
+    }
+  }
+
+  lines.push(line);
+  return lines;
+}
