@@ -302,3 +302,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,windows,linux,macos,node,visualstudiocode
 
 images/
+config.json
