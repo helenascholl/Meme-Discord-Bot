@@ -8,6 +8,7 @@ dotenv.config();
 
 const IMAGE_WIDTH = 500;
 const FONT_FAMILY = 'Roboto';
+const ADMIN_ROLE = 'Memegod';
 
 const token = process.env['NODE_ENV'] === 'development' ?
   process.env['DISCORD_DEV_TOKEN'] :
@@ -68,7 +69,8 @@ client.on('message', async message => {
 client.login(token).catch(console.error);
 
 function config(text: string, message: Discord.Message): void {
-  if (!message.member?.hasPermission('ADMINISTRATOR')) {
+  if (!(message.member?.hasPermission('ADMINISTRATOR')
+    || message.guild?.roles.cache.find(r => r.name === ADMIN_ROLE)?.members.has(message.author.id))) {
     message.channel.send("You don't have permission to do that!")
       .catch(console.error);
   } else {
