@@ -2,13 +2,13 @@ import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import MemeConfig from './meme-config.interface';
 import fs from 'fs';
-import { createCanvas, loadImage } from 'canvas';
+import { createCanvas, loadImage, registerFont } from 'canvas';
 
 dotenv.config();
 
 const IMAGE_WIDTH = 500;
 const FONT_SIZE = 40;
-const FONT_FAMILY = 'Sans';
+const FONT_FAMILY = 'Roboto';
 const ADMIN_ROLE = 'Memegod';
 
 const token = process.env['NODE_ENV'] === 'development' ?
@@ -16,6 +16,8 @@ const token = process.env['NODE_ENV'] === 'development' ?
   process.env['DISCORD_PROD_TOKEN'];
 const client = new Discord.Client();
 const memes = new Map<string, MemeConfig>();
+
+registerFont('src/fonts/Roboto-Regular.ttf', { family: FONT_FAMILY });
 
 client.on('ready', () => {
   client.user!.setActivity('!say help', { type: 'LISTENING' });
@@ -272,7 +274,7 @@ async function drawImage(meme: MemeConfig | string, text: string): Promise<Buffe
 
   for (let i = 0; i < wrappedText.length; i++) {
     const x = IMAGE_WIDTH / 2;
-    const y = imageHeight - 30 * (wrappedText.length - i);
+    const y = imageHeight - FONT_SIZE * (wrappedText.length - 1 - i) - 30;
 
     ctx.fillText(wrappedText[i], x, y);
     ctx.strokeText(wrappedText[i], x, y);
@@ -292,13 +294,16 @@ function wrapText(text: string, maxWidth: number, ctx: CanvasRenderingContext2D)
     const { width } = ctx.measureText(testLine);
 
     if (width > maxWidth && line !== '') {
-      lines.push(testLine.trimEnd());
-      line = '';
+      lines.push(line.trimEnd());
+      line = `${word} `;
     } else {
       line = testLine;
     }
   }
 
-  lines.push(line);
+  if (line !== '') {
+    lines.push(line.trimEnd());
+  }
+
   return lines;
 }
