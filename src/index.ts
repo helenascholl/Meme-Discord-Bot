@@ -43,22 +43,8 @@ client.on('message', async message => {
         .catch(console.error);
     } else {
       const meme = memes.get(memeName)!;
-      const image = await loadImage(`images/${meme.filename}`);
+      const attachment = new Discord.MessageAttachment(await drawImage(meme, text), `${meme.name}.png`);
 
-      const canvas = createCanvas(IMAGE_WIDTH, image.height);
-      const ctx = canvas.getContext('2d');
-
-      ctx.drawImage(image, 0, 0);
-
-      ctx.font = '30px Roboto';
-      ctx.fillStyle = 'white';
-      ctx.textAlign = 'center';
-      ctx.fillText(text, IMAGE_WIDTH / 2, image.height - 20);
-
-      ctx.strokeStyle = 'black';
-      ctx.strokeText(text, IMAGE_WIDTH / 2, image.height - 20);
-
-      const attachment = new Discord.MessageAttachment(canvas.toBuffer(), `${meme.name}.png`);
       message.channel.send(attachment)
         .catch(console.error);
     }
@@ -66,3 +52,22 @@ client.on('message', async message => {
 });
 
 client.login(token).catch(console.error);
+
+async function drawImage(meme: MemeConfig, text: string): Promise<Buffer> {
+  const image = await loadImage(`images/${meme.filename}`);
+
+  const canvas = createCanvas(IMAGE_WIDTH, image.height);
+  const ctx = canvas.getContext('2d');
+
+  ctx.drawImage(image, 0, 0);
+
+  ctx.font = '30px Roboto';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.fillText(text, IMAGE_WIDTH / 2, image.height - 20);
+
+  ctx.strokeStyle = 'black';
+  ctx.strokeText(text, IMAGE_WIDTH / 2, image.height - 20);
+
+  return canvas.toBuffer();
+}
