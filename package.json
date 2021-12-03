@@ -1,7 +1,7 @@
 {
-  "name": "your-bot",
+  "name": "meme-bot",
   "version": "1.0.0",
-  "description": "A Discord bot.",
+  "description": "A Discord meme bot.",
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist/index.js",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/schollsebastian/Discord-Bot-Template.git"
+    "url": "git+https://github.com/schollsebastian/Meme-Discord-Bot.git"
   },
   "keywords": [
     "discord",
     "discord.js",
     "discord-bot"
   ],
-  "author": "Your Name <email@example.com> (http://example.com)",
+  "author": "Sebastian Scholl <scholl.sebastian@gmx.at> (https://schollsebastian.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/schollsebastian/Discord-Bot-Template/issues"
+    "url": "https://github.com/schollsebastian/Meme-Discord-Bot/issues"
   },
-  "homepage": "https://github.com/schollsebastian/Discord-Bot-Template#readme",
+  "homepage": "https://github.com/schollsebastian/Meme-Discord-Bot#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
