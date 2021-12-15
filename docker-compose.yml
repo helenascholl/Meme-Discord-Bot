@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
   meme-bot:
-    build: .
+    build: bot
     restart: unless-stopped
     environment:
       NODE_ENV: production
     volumes:
-      - .:/usr/src/app
+      - ./bot:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/dist
