@@ -1,0 +1,90 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "indent": [
+          "error",
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "linebreak-style": [
+          "error",
+          "unix"
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "avoidEscape": true
+          }
+        ],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "brace-style": [
+          "error",
+          "1tbs",
+          {
+            "allowSingleLine": true
+          }
+        ],
+        "no-var": "error",
+        "no-trailing-spaces": "error",
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ],
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "space-before-blocks": [
+          "error",
+          "always"
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
