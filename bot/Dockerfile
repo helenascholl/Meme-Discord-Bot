@@ -11,6 +11,8 @@ RUN npm install
 
 COPY . .
 
+RUN cp -n src/config.template.json src/config.json
+
 RUN npm run lint && \
     npm run build
 
