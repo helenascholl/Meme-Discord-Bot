@@ -10,5 +10,6 @@ import { Config } from './config';
 export class AppComponent {
 
   public readonly config = config as Config[];
+  public readonly inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
 
 }
