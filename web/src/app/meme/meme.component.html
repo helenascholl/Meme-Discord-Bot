@@ -4,11 +4,12 @@
     <img alt="{{ name }}" src="assets/images/{{ filename }}">
   </mat-card-content>
   <mat-card-actions>
-    <span>{{ customPrefix ?? '!say ' + name }}</span>
-
-    <mat-form-field>
-      <input matInput type="text" [(ngModel)]="text">
-    </mat-form-field>
+    <div class="inline">
+      <span>{{ customPrefix ?? '!say ' + name }}</span>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="text">
+      </mat-form-field>
+    </div>
 
     <button mat-button (click)="copyToClipboard()"><mat-icon>content_copy</mat-icon></button>
   </mat-card-actions>
