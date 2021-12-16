@@ -5,6 +5,11 @@ import { AppComponent } from './app.component';
 import { MemeComponent } from './meme/meme.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,12 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     BrowserModule,
     NoopAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
