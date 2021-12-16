@@ -16,6 +16,4 @@ export class MemeComponent {
   @Input()
   public customPrefix: string | undefined;
 
-  constructor() { }
-
 }
