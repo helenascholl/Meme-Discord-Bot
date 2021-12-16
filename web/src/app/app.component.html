@@ -1,4 +1,9 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title>Memebot</mat-card-title>
+    <mat-card-subtitle>Invite me: <a href="{{ inviteLink }}">{{ inviteLink }}</a></mat-card-subtitle>
+  </mat-card-header>
+
   <mat-card-content>
     <app-meme
       *ngFor="let configElem of config"
