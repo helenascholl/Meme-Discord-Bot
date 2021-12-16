@@ -1,6 +1,10 @@
-<app-meme
-  *ngFor="let configElem of config"
-  [name]="configElem.name"
-  [filename]="configElem.filename"
-  [customPrefix]="configElem.customPrefix"
-></app-meme>
+<mat-card>
+  <mat-card-content>
+    <app-meme
+      *ngFor="let configElem of config"
+      [name]="configElem.name"
+      [filename]="configElem.filename"
+      [customPrefix]="configElem.customPrefix"
+    ></app-meme>
+  </mat-card-content>
+</mat-card>
