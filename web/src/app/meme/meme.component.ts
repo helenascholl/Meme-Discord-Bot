@@ -8,10 +8,10 @@ import { Component, Input } from '@angular/core';
 export class MemeComponent {
 
   @Input()
-  public imagePath!: string;
+  public name!: string;
 
   @Input()
-  public meme!: string;
+  public filename!: string;
 
   @Input()
   public customPrefix: string | undefined;
