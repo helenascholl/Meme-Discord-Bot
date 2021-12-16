@@ -303,5 +303,5 @@ $RECYCLE.BIN/
 
 .idea/
 
-bot/images/
-bot/src/config.json
+images/
+config.json
