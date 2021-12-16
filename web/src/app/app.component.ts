@@ -14,4 +14,8 @@ export class AppComponent {
     this.inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
   }
 
+  public reload(): void {
+    this.configService.updateConfig();
+  }
+
 }
