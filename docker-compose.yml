@@ -10,3 +10,15 @@ services:
       - ./bot:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/dist
+
+  web:
+    build: web
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - meme-bot
+    volumes:
+      - ./bot/src/config.json:/usr/share/nginx/html/assets/config.json:ro
+      - ./bot/images:/usr/share/nginx/html/assets/images:ro
