@@ -22,7 +22,7 @@ export class MemeComponent {
     this.text = '';
   }
 
-  public copyToClipboard() {
+  public copyToClipboard(): void {
     const textarea = document.createElement('textarea');
 
     textarea.style.position = 'fixed';
