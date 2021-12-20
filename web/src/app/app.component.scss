@@ -12,12 +12,12 @@ app-meme {
   margin: 1vw !important;
 }
 
-button {
+mat-card-header button {
   position: absolute;
   right: 1vw;
   top: 1vw;
 }
 
-mat-icon {
+mat-form-field mat-icon {
   cursor: pointer;
 }
