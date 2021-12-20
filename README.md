@@ -11,6 +11,16 @@ https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&
 - `!say [meme name] [text]`
 - `!say help`
 
+## Web
+
+This bot also includes a web frontend that displays all memes. It can be
+viewed at [localhost](http://localhost).
+
+**Note**: Because Angular's memory consumption during build is just insane
+and some Cloud VMs can't handle that, you need to run `npm run build` before
+starting the Docker services with `docker-compose up -d`. If you want Docker
+to do the building for you, you can use the `Dockerfile` in the `web` directory.
+
 ### Only for Admins and users with the Memegod role
 
 - `!say config add [meme name] [image url] [custom prefix (optional)]`
