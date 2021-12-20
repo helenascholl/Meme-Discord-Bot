@@ -15,7 +15,7 @@ jobs:
       - name: Add Dicord token
         run: |
           cp bot/template.env bot/.env
-          sed -i 's/yourprodtoken/${{ secrets.DISCORD_TOKEN }}/g' .env
+          sed -i 's/yourprodtoken/${{ secrets.DISCORD_TOKEN }}/g' bot/.env
       - name: Build web
         run: |
           cd web
