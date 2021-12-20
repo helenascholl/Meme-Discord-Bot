@@ -15,7 +15,7 @@ export class ConfigService {
   constructor(private http: HttpClient) {
     this.config = [];
     this.baseUrl = environment.production
-      ? 'http://localhost'
+      ? 'http://127.0.0.1'
       : 'http://localhost:4200';
 
     this.updateConfig();
