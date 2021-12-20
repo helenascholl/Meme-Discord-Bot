@@ -14,7 +14,7 @@
 
   <mat-card-content>
     <app-meme
-      *ngFor="let configElem of shownMemes"
+      *ngFor="let configElem of getVisibleMemes()"
       [name]="configElem.name"
       [filename]="configElem.filename"
       [customPrefix]="configElem.customPrefix"

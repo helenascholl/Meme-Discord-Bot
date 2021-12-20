@@ -10,25 +10,43 @@ import { Config } from './config';
 export class AppComponent implements OnInit {
 
   public readonly inviteLink: string;
-  public shownMemes: Config[];
+  public memes: Meme[];
 
   constructor(private configService: ConfigService) {
     this.inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
-    this.shownMemes = [];
+    this.memes = [];
   }
 
   public ngOnInit(): void {
     this.reload();
   }
 
+  public getVisibleMemes(): Meme[] {
+    return this.memes.filter(m => m.visible);
+  }
+
   public reload(): void {
     this.configService.updateConfig()
-      .subscribe(c => this.shownMemes = c);
+      .subscribe(c => {
+        this.memes = c.map(m => {
+          return {
+            name: m.name,
+            filename: m.filename,
+            customPrefix: m.customPrefix,
+            visible: true
+          };
+        });
+      });
   }
 
   public filter(value: string) {
-    this.shownMemes = this.configService.config
-      .filter(c => c.name.startsWith(value));
+    this.memes.forEach(m => m.visible = m.name.startsWith(value));
   }
+
+}
+
+interface Meme extends Config {
+
+  visible: boolean;
 
 }
