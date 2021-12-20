@@ -19,6 +19,7 @@ jobs:
       - name: Build web
         run: |
           cd web
+          npm install
           npm run lint
           npm run build
       - name: Deploy to server
