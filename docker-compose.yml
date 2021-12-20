@@ -12,7 +12,7 @@ services:
       - /usr/src/app/dist
 
   web:
-    build: web
+    image: nginx:1.21.4-alpine
     restart: unless-stopped
     ports:
       - '80:80'
@@ -20,5 +20,6 @@ services:
     depends_on:
       - meme-bot
     volumes:
+      - ./web/dist/meme-bot-web:/usr/share/nginx/html
       - ./bot/src/config.json:/usr/share/nginx/html/assets/config.json:ro
       - ./bot/images:/usr/share/nginx/html/assets/images:ro
