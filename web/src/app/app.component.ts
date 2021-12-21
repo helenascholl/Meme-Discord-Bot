@@ -71,6 +71,16 @@ export class AppComponent implements OnInit {
     }
   }
 
+  public changeSortDirection(): void {
+    if (this.sortDirection === SortDirection.ASCENDING) {
+      this.sortDirection = SortDirection.DESCENDING;
+    } else {
+      this.sortDirection = SortDirection.ASCENDING;
+    }
+
+    this.sort();
+  }
+
 }
 
 interface Meme extends Config {
