@@ -21,3 +21,12 @@ mat-card-header button {
 mat-form-field mat-icon {
   cursor: pointer;
 }
+
+div > mat-icon {
+  margin-right: 1vw;
+}
+
+div {
+  display: flex;
+  align-items: center;
+}
