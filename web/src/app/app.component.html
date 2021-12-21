@@ -10,6 +10,14 @@
       <input #search matInput placeholder="Search" type="text" (input)="filter(search.value)">
       <mat-icon matSuffix (click)="search.value = ''; filter('')">clear</mat-icon>
     </mat-form-field>
+
+    <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
+    <mat-form-field>
+      <mat-select [(value)]="sortType" (selectionChange)="sort()">
+        <mat-option *ngFor="let sortType of sortTypes" [value]="sortType[0]">{{ sortType[1] }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-icon>sort</mat-icon>
   </mat-card>
 
   <mat-card-content>

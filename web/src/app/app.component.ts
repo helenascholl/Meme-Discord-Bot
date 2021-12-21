@@ -10,11 +10,20 @@ import { Config } from './config';
 export class AppComponent implements OnInit {
 
   public readonly inviteLink: string;
+  public readonly sortTypes: [string, string][];
   public memes: Meme[];
+  public sortType: string;
+  public sortDirection: SortDirection;
 
   constructor(private configService: ConfigService) {
     this.inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
+    this.sortTypes = [
+      [ 'date-added', 'Date added' ],
+      [ 'alphabetical', 'Alphabetical' ]
+    ];
     this.memes = [];
+    this.sortDirection = SortDirection.DESCENDING;
+    this.sortType = this.sortTypes[0][0];
   }
 
   public ngOnInit(): void {
@@ -28,14 +37,17 @@ export class AppComponent implements OnInit {
   public reload(): void {
     this.configService.updateConfig()
       .subscribe(c => {
-        this.memes = c.map(m => {
+        this.memes = c.map((m, i) => {
           return {
             name: m.name,
             filename: m.filename,
             customPrefix: m.customPrefix,
-            visible: true
+            visible: true,
+            order: i
           };
         });
+
+        this.sort();
       });
   }
 
@@ -43,10 +55,34 @@ export class AppComponent implements OnInit {
     this.memes.forEach(m => m.visible = m.name.startsWith(value));
   }
 
+  public sort() {
+    switch (this.sortType) {
+      case 'date-added':
+        this.memes = this.memes.sort((m1, m2) => m1.order - m2.order);
+        break;
+
+      case 'alphabetical':
+        this.memes = this.memes.sort((m1, m2) => m1.name.localeCompare(m2.name));
+        break;
+    }
+
+    if (this.sortDirection === SortDirection.ASCENDING) {
+      this.memes = this.memes.reverse();
+    }
+  }
+
 }
 
 interface Meme extends Config {
 
   visible: boolean;
+  order: number;
+
+}
+
+enum SortDirection {
+
+  ASCENDING,
+  DESCENDING
 
 }
