@@ -51,11 +51,11 @@ export class AppComponent implements OnInit {
       });
   }
 
-  public filter(value: string) {
+  public filter(value: string): void {
     this.memes.forEach(m => m.visible = m.name.startsWith(value));
   }
 
-  public sort() {
+  public sort(): void {
     switch (this.sortType) {
       case 'date-added':
         this.memes = this.memes.sort((m1, m2) => m1.order - m2.order);
