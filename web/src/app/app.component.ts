@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   }
 
   public filter(): void {
-    this.memes.forEach(m => m.visible = m.name.includes(this.filterString));
+    this.memes.forEach(m => m.visible = m.name.toLowerCase().includes(this.filterString.toLowerCase()));
   }
 
   public sort(): void {
