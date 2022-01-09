@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   public filter(value: string): void {
-    this.memes.forEach(m => m.visible = m.name.startsWith(value));
+    this.memes.forEach(m => m.visible = m.name.includes(value));
   }
 
   public sort(): void {
