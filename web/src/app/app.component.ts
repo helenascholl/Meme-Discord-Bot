@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   public memes: Meme[];
   public sortType: string;
   public sortDirection: SortDirection;
+  public filterString: string;
 
   constructor(private configService: ConfigService) {
     this.inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
     this.memes = [];
     this.sortDirection = SortDirection.DESCENDING;
     this.sortType = this.sortTypes[0][0];
+    this.filterString = '';
   }
 
   public ngOnInit(): void {
@@ -48,11 +50,12 @@ export class AppComponent implements OnInit {
         });
 
         this.sort();
+        this.filter();
       });
   }
 
-  public filter(value: string): void {
-    this.memes.forEach(m => m.visible = m.name.includes(value));
+  public filter(): void {
+    this.memes.forEach(m => m.visible = m.name.includes(this.filterString));
   }
 
   public sort(): void {

@@ -9,8 +9,8 @@
     <div>
       <mat-icon>search</mat-icon>
       <mat-form-field>
-        <input #search matInput placeholder="Search" type="text" (input)="filter(search.value)">
-        <mat-icon matSuffix (click)="search.value = ''; filter('')">clear</mat-icon>
+        <input matInput placeholder="Search" type="text" (input)="filter()" [(ngModel)]="filterString">
+        <mat-icon matSuffix (click)="filterString = ''; filter()">clear</mat-icon>
       </mat-form-field>
     </div>
 
