@@ -37,3 +37,14 @@ div {
   top: 0;
   z-index: 100;
 }
+
+.switch {
+  float: right;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+}
+
+.switch div mat-slide-toggle {
+  margin: 0 1vw;
+}
