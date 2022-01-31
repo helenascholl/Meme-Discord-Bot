@@ -23,6 +23,14 @@
       </mat-form-field>
       <button mat-icon-button (click)="changeSortDirection()"><mat-icon>swap_vert</mat-icon></button>
     </div>
+
+    <div class="switch">
+      <div>
+        <span>!say</span>
+        <mat-slide-toggle [(ngModel)]="say"></mat-slide-toggle>
+        <span>!whisper</span>
+      </div>
+    </div>
   </mat-card>
 
   <mat-card-content>

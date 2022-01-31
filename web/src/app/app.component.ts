@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   public sortType: string;
   public sortDirection: SortDirection;
   public filterString: string;
+  public say: boolean;
 
   constructor(private configService: ConfigService) {
     this.inviteLink = 'https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816';
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     this.sortDirection = SortDirection.DESCENDING;
     this.sortType = this.sortTypes[0][0];
     this.filterString = '';
+    this.say = false;
   }
 
   public ngOnInit(): void {
