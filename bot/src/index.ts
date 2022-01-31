@@ -81,6 +81,7 @@ client.login(token).catch(console.error);
 
 function help(message: Discord.Message) {
   const help = '```!say [meme name] [text]\n'
+    + '!whisper [meme name] [text]\n'
     + '!say help```\n'
     + 'Only for Admins and users with the Memegod role:\n'
     + '```!say config add [meme name] [image url] [custom prefix (optional)]\n'
