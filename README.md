@@ -9,6 +9,7 @@ https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&
 ## Usage
 
 - `!say [meme name] [text]`
+- `!whisper [meme name] [text]`
 - `!say help`
 
 ## Web
