@@ -5,7 +5,7 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="inline">
-      <span>{{ customPrefix ?? '!say ' + name }}</span>
+      <span>{{ customPrefix ?? prefix + ' ' + name }}</span>
       <mat-form-field>
         <input matInput type="text" [(ngModel)]="text">
       </mat-form-field>

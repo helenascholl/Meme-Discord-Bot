@@ -16,6 +16,9 @@ export class MemeComponent {
   @Input()
   public customPrefix: string | undefined;
 
+  @Input()
+  public prefix!: string;
+
   public text: string;
 
   constructor() {
@@ -30,7 +33,7 @@ export class MemeComponent {
     textarea.style.top = '0';
     textarea.style.opacity = '0';
 
-    textarea.value = `${this.customPrefix ?? `!say ${this.name}`} ${this.text}`;
+    textarea.value = `${this.customPrefix ?? `${this.prefix} ${this.name}`} ${this.text}`;
     document.body.appendChild(textarea);
 
     textarea.focus();
