@@ -27,7 +27,7 @@
     <div class="switch">
       <div>
         <span>!say</span>
-        <mat-slide-toggle [(ngModel)]="say"></mat-slide-toggle>
+        <mat-slide-toggle (change)="changePrefix()"></mat-slide-toggle>
         <span>!whisper</span>
       </div>
     </div>
@@ -39,6 +39,7 @@
       [name]="configElem.name"
       [filename]="configElem.filename"
       [customPrefix]="configElem.customPrefix"
+      [prefix]="prefix"
     ></app-meme>
   </mat-card-content>
 </mat-card>
