@@ -34,21 +34,34 @@ client.on('message', async message => {
     config(text, message);
   } else if (message.content.startsWith('!say help')) {
     help(message);
-  } else if (message.content.startsWith('!say')) {
+  } else if (message.content.startsWith('!say') || message.content.startsWith('!whisper')) {
     const memeName = message.content.split(' ')[1];
-    const text = message.content.indexOf(' ', 5) !== -1
-      ? message.content.substring(message.content.indexOf(' ', 6) + 1)
+    const commandLength = message.content.startsWith('!say') ? 5 : 9;
+    const text = message.content.indexOf(' ', commandLength) !== -1
+      ? message.content.substring(message.content.indexOf(' ', commandLength + 1) + 1)
       : '';
 
     try {
       new URL(memeName);
-      sendMeme(memeName, text, message);
+      sendMeme(memeName, text, message)
+        .then(() => {
+          if (message.content.startsWith('!whisper')) {
+            message.delete()
+              .catch(console.error);
+          }
+        });
     } catch {
       if (!memes.has(memeName)) {
         message.channel.send('That meme doesn\'t exist!')
           .catch(console.error);
       } else {
-        sendMeme(memes.get(memeName)!, text, message);
+        sendMeme(memes.get(memeName)!, text, message)
+          .then(() => {
+            if (message.content.startsWith('!whisper')) {
+              message.delete()
+                .catch(console.error);
+            }
+          });
       }
     }
   } else {
