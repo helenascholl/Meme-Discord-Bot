@@ -4,7 +4,7 @@ Create memes quickly in Discord.
 
 ## Invite the bot
 
-https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=34816
+https://discordapp.com/oauth2/authorize?&client_id=916227104666968074&scope=bot&permissions=108544
 
 ## Usage
 
