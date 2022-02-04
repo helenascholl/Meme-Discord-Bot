@@ -22,6 +22,11 @@ jobs:
           npm install
           npm run lint
           npm run build
+      - name: Create .env
+        run: |
+          cp template.env .env
+          sed -i 's/example.com/${{ secrets.REMOTE_HOST }}/g' .env
+          sed -i 's/80/${{ secrets.PORT }}/g' .env
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@v2.1.6
         env:
@@ -31,11 +36,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: /.git/
-      - name: Create .env
-        run: |
-          cp template.env .env
-          sed -i 's/example.com/${{ secrets.REMOTE_HOST }}/g' .env
-          sed -i 's/80/${{ secrets.PORT }}/g' .env
       - name: Start Docker container
         uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
