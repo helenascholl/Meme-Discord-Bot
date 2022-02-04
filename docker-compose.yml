@@ -15,7 +15,7 @@ services:
     image: nginx:1.21.4-alpine
     restart: unless-stopped
     ports:
-      - '3000:80'
+      - '${PORT}:80'
     depends_on:
       - meme-bot
     volumes:
