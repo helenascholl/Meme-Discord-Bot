@@ -36,7 +36,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
           ARGS: -rltgoDzO
-          EXCLUDE: /.git/
+          EXCLUDE: /.git/, /web/node_modules/
       - name: Start Docker container
         uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
