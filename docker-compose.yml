@@ -18,7 +18,22 @@ services:
       - '${PORT}:80'
     depends_on:
       - meme-bot
+    labels:
+      # Enable Traefik
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=traefik'
+      # Meme Bot Web
+      - 'traefik.http.routers.meme-bot-web.rule=Host(`${HOSTNAME}`)'
+      - 'traefik.http.routers.meme-bot-web.entrypoints=https'
+      - 'traefik.http.routers.meme-bot-web.tls=true'
+      - 'traefik.http.routers.meme-bot-web.tls.certresolver=default'
     volumes:
       - ./web/dist/meme-bot-web:/usr/share/nginx/html
       - ./bot/src/config.json:/usr/share/nginx/html/assets/config.json:ro
       - ./bot/images:/usr/share/nginx/html/assets/images:ro
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
