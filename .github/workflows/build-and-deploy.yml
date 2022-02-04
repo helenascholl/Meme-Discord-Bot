@@ -25,6 +25,11 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: /.git/, /web/node_modules/
+      - name: Create .env
+        run: |
+          cp template.env .env
+          sed -i 's/example.com/${{ secrets.REMOTE_HOST }}/g' .env
+          sed -i 's/80/${{ secrets.PORT }}/g' .env
       - name: Start Docker container
         uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
